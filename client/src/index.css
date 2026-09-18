@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.375rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply m-0 bg-[#f4f7fe] font-sans text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+}
+
+@layer components {
+  .table-scroll {
+    @apply w-full overflow-x-auto;
+  }
+
+  .table-scroll table {
+    @apply min-w-[640px];
+  }
+
+  .app {
+    @apply min-h-screen lg:grid lg:grid-cols-[230px_1fr];
+  }
+
+  .sidebar {
+    @apply fixed inset-y-0 left-0 z-30 flex w-[230px] -translate-x-full flex-col overflow-y-auto border-r border-slate-100 bg-white p-4 text-slate-600 transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0;
+  }
+
+  .sidebar.open {
+    @apply translate-x-0 shadow-2xl;
+  }
+
+  .brand {
+    @apply mb-4 flex items-center gap-2.5 px-1 text-lg font-black tracking-tight text-slate-900;
+  }
+
+  .user-profile-badge {
+    @apply mb-4 flex items-center justify-between rounded-xl border border-slate-100/90 bg-slate-50/80 px-2.5 py-2 transition hover:bg-slate-100/70;
+  }
+
+  .nav {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .nav a,
+  .nav button {
+    @apply flex w-full items-center gap-3 rounded-xl border-0 bg-transparent px-3 py-2 text-left text-[13px] font-medium text-slate-500 transition hover:bg-slate-50 hover:text-slate-900;
+  }
+
+  .nav a.active {
+    @apply bg-blue-50/80 font-bold text-blue-600 shadow-none;
+  }
+
+  .overlay {
+    @apply fixed inset-0 z-20 hidden bg-slate-900/30 backdrop-blur-sm;
+  }
+
+  .overlay.show {
+    @apply block lg:hidden;
+  }
+
+  .main {
+    @apply min-w-0 px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-6;
+  }
+
+  .topbar {
+    @apply mb-6 flex flex-wrap items-center justify-between gap-3;
+  }
+
+  .menu-btn {
+    @apply inline-flex lg:hidden;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-100/90 bg-white p-5 shadow-[0_2px_12px_rgba(15,23,42,0.03)];
+  }
+
+  .stat-arrow-btn {
+    @apply flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition hover:bg-blue-100 hover:text-blue-700 active:scale-95;
+  }
+
+  /* SVG dimension guards */
+  svg:not([width]) {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+  .sidebar svg:not(.brand-logo),
+  .nav svg,
+  .btn svg,
+  .stat-arrow-btn svg,
+  .user-profile-badge svg {
+    max-width: 20px;
+    max-height: 20px;
+  }
+
+  .card > h2,
+  .card h2 {
+    @apply mb-1 text-base font-bold tracking-tight text-slate-900;
+  }
+
+  .field {
+    @apply mb-3 flex flex-col gap-1.5;
+  }
+
+  .field > span {
+    @apply text-xs font-semibold uppercase tracking-wider text-slate-500;
+  }
+
+  .field input,
+  .field select,
+  .field textarea,
+  .toolbar input,
+  .toolbar select {
+    @apply w-full rounded-xl border border-slate-200/90 bg-slate-50/70 px-3.5 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl border-0 bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn.secondary {
+    @apply bg-blue-50 text-blue-700 shadow-none hover:bg-blue-100;
+  }
+
+  .btn.danger {
+    @apply bg-rose-600 text-white hover:bg-rose-500;
+  }
+
+  .btn.ghost {
+    @apply border border-slate-200 bg-white text-slate-700 shadow-none hover:bg-slate-50;
+  }
+
+  .banner {
+    @apply mb-4 flex items-center gap-2.5 rounded-xl px-4 py-3 text-sm font-medium;
+  }
+
+  .banner.error {
+    @apply border border-rose-100 bg-rose-50 text-rose-700;
+  }
+
+  .banner.ok {
+    @apply border border-emerald-100 bg-emerald-50 text-emerald-700;
+  }
+
+  @keyframes toast-slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .toast-enter {
+    animation: toast-slide-in 0.28s ease-out;
+  }
+
+  .empty {
+    @apply rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-12 text-center text-sm text-slate-500;
+  }
+
+  .form-grid {
+    @apply mb-5 grid items-end gap-3 sm:grid-cols-2 lg:grid-cols-4;
+  }
+
+  .toolbar {
+    @apply mb-4 flex flex-wrap items-center gap-2.5;
+  }
+
+  table {
+    @apply w-full min-w-[560px] border-collapse text-left text-sm;
+  }
+
+  th {
+    @apply border-b border-slate-100 bg-slate-50/80 px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-slate-400;
+  }
+
+  td {
+    @apply border-t border-slate-100 px-4 py-3.5 font-medium text-slate-700;
+  }
+
+  .tabs {
+    @apply mb-5 flex flex-wrap gap-2;
+  }
+
+  .tab-item {
+    @apply rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100;
+  }
+
+  .tab-item.active {
+    @apply bg-blue-600 font-semibold text-white shadow-sm;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full bg-blue-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-blue-700;
+  }
+}
